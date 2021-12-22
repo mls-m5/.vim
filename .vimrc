@@ -26,4 +26,77 @@ colorscheme aldmeris
 :nmap <c-w> :q<CR>
 :imap <c-w> <Esc>:q<CR>
 
+" Clang format
+function FormatBuffer()
+  if &modified && !empty(findfile('.clang-format', expand('%:p:h') . ';'))
+    let cursor_pos = getpos('.')
+    :%!clang-format
+    call setpos('.', cursor_pos)
+  endif
+endfunction
+ 
+autocmd BufWritePre *.h,*.hpp,*.c,*.cpp,*.vert,*.frag :call FormatBuffer()
+
+
+" Replace tabs with 4 spaces
+set expandtab
+set tabstop=4
+set shiftwidth=4
+
+" Use matmake as standard
+set makeprg=matmake2\ -t\ gcc-debug
+
+" vim-lsp
+" ===============
+" https://jonasdevlieghere.com/vim-lsp-clangd/
+if executable('clangd')
+    augroup lsp_clangd
+        autocmd!
+        autocmd User lsp_setup call lsp#register_server({
+                    \ 'name': 'clangd',
+                    \ 'cmd': {server_info->['clangd']},
+                    \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+                    \ })
+        autocmd FileType c setlocal omnifunc=lsp#complete
+        autocmd FileType cpp setlocal omnifunc=lsp#complete
+        autocmd FileType objc setlocal omnifunc=lsp#complete
+        autocmd FileType objcpp setlocal omnifunc=lsp#complete
+    augroup end
+endif
+
+
+
+
+function! s:on_lsp_buffer_enabled() abort
+    setlocal omnifunc=lsp#complete
+    setlocal signcolumn=yes
+    if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+
+    let g:lsp_format_sync_timeout = 1000
+    autocmd! BufWritePre *.rs,*.go call execute('LspDocumentFormatSync')
+
+    " refer to doc to add more commands
+endfunction
+
+
+augroup lsp_install
+        au!
+            " call s:on_lsp_buffer_enabled only for languages that has the
+            " server registered.
+            "     autocmd User lsp_buffer_enabled call
+            "     s:on_lsp_buffer_enabled()
+            "     augroup END
+            "
+
+" Autocompletion
+" Use ctrl+n and ctrl+p to step in autocompletion list
+
+" Use space as leader key
+nnoremap <SPACE> <Nop>
+map <Space> <Leader>
+
+nmap <Leader>r :LspRename<CR>
+nmap <Leader>R :LspReferences<CR>
+
+
 
