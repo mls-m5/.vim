@@ -1,0 +1,3 @@
+[submodule "bundle/vim-aldmeris"]
+	path = bundle/vim-aldmeris
+	url = git://github.com/veloce/vim-aldmeris.git
