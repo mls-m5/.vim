@@ -62,6 +62,8 @@ if executable('clangd')
         autocmd FileType objc setlocal omnifunc=lsp#complete
         autocmd FileType objcpp setlocal omnifunc=lsp#complete
     augroup end
+else
+    echo 'Clangd Not installed'
 endif
 
 
