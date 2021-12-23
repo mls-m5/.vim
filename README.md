@@ -14,7 +14,8 @@ https://apt.llvm.org/
 
 ```sh
 bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"
-sudo apt install clang-format-13
+sudo apt install clang-format-13 
 sudo update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-13 100
+sudo update-alternatives --install /usr/bin/clang-format clangd-format /usr/bin/clang-format-13 100
 ```
 
