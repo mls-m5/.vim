@@ -32,6 +32,7 @@ set shiftwidth=4
 " Use matmake as standard
 set makeprg=matmake2\ -t\ gcc-debug
 
+syn match UrlNoSpell "\w\+:\/\/[^[:space:]]\+" contains=@NoSpell
 
 " Keybindings
 " ===================================================================
