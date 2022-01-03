@@ -1,16 +1,40 @@
+
 " On first checkout remember to symlink with
 " ln -s ~/.vim/.vimrc ~/.vimrc
 
+call plug#begin('~/.vim/plugged')
+Plug 'veloce/vim-aldmeris'
+Plug 'junegunn/fzf'
+Plug 'prabirshrestha/vim-lsp'
+call plug#end()
+
+" Misc settings
+" =======================================================
+
+filetype plugin indent on
+
+syntax on
+
 " Remove the standard vim startup screen
 set shm+=I
-
-" Pathogen is a plugin that loads all plugins from folder "bundle"
-execute pathogen#infect()
-syntax on
-filetype plugin indent on
+:set guioptions -=T
 
 " Oblivion color scheme
 colorscheme aldmeris
+
+
+" Replace tabs with 4 spaces
+set expandtab
+set tabstop=4
+set shiftwidth=4
+
+
+" Use matmake as standard
+set makeprg=matmake2\ -t\ gcc-debug
+
+
+" Keybindings
+" ===================================================================
 
 " https://stackoverflow.com/questions/3446320/in-vim-how-to-map-save-to-ctrl-s
 " Remember to add the following to ~/.bash_profile or ~/.bashrc
@@ -18,13 +42,11 @@ colorscheme aldmeris
 " bind -r '\C-s'
 " stty -ixon
 
-" Save with ctrl+s
-" :update saves if there has been any changes to the file
-:nmap <c-s> :update<CR>
-:imap <c-s> <Esc>:update<CR>a
 
-:nmap <c-w> :q<CR>
-:imap <c-w> <Esc>:q<CR>
+
+
+" Clang format
+" ========================================================0
 
 " Clang format
 function FormatBuffer()
@@ -38,16 +60,9 @@ endfunction
 autocmd BufWritePre *.h,*.hpp,*.c,*.cpp,*.vert,*.frag :call FormatBuffer()
 
 
-" Replace tabs with 4 spaces
-set expandtab
-set tabstop=4
-set shiftwidth=4
-
-" Use matmake as standard
-set makeprg=matmake2\ -t\ gcc-debug
 
 " vim-lsp
-" ===============
+" ===============                        
 " https://jonasdevlieghere.com/vim-lsp-clangd/
 if executable('clangd')
     augroup lsp_clangd
@@ -65,8 +80,6 @@ if executable('clangd')
 else
     echo 'Clangd Not installed'
 endif
-
-
 
 
 function! s:on_lsp_buffer_enabled() abort
@@ -93,12 +106,24 @@ augroup lsp_install
 " Autocompletion
 " Use ctrl+n and ctrl+p to step in autocompletion list
 
+" Keymaps
+" =====================================0000
+
+" Save with ctrl+s
+" :update saves if there has been any changes to the file
+nmap <c-s> :update<CR>
+imap <c-s> <Esc>:update<CR>a
+
+"2 :nmap <c-w> :q<CR>
+" :imap <c-w> <Esc>:q<CR>
+
 " Use space as leader key
 nnoremap <SPACE> <Nop>
-map <Space> <Leader>
+nmap <Space> <Leader>
 
 nmap <Leader>r :LspRename<CR>
 nmap <Leader>R :LspReferences<CR>
+nmap <Leader>w :q<CR>
 
 
 
