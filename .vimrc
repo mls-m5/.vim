@@ -4,7 +4,7 @@
 
 call plug#begin('~/.vim/plugged')
 Plug 'veloce/vim-aldmeris'
-Plug 'junegunn/fzf'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'prabirshrestha/vim-lsp'
 call plug#end()
 
@@ -124,6 +124,8 @@ nmap <Space> <Leader>
 nmap <Leader>r :LspRename<CR>
 nmap <Leader>R :LspReferences<CR>
 nmap <Leader>w :q<CR>
+
+nnoremap <Leader>p :CtrlP<CR>
 
 
 
