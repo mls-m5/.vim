@@ -2,3 +2,6 @@
 plugged
 .netrwhist
 Old
+
+spell/*.spl
+spell/*.sug

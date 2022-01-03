@@ -127,5 +127,7 @@ nmap <Leader>w :q<CR>
 
 nnoremap <Leader>p :CtrlP<CR>
 
+nnoremap <c-B> :make<CR>
+
 
 
