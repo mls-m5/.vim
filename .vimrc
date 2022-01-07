@@ -28,6 +28,8 @@ set expandtab
 set tabstop=4
 set shiftwidth=4
 
+" Soft wrap words
+:set linebreak
 
 " Use matmake as standard
 set makeprg=matmake2\ -t\ gcc-debug
@@ -126,9 +128,12 @@ nmap <Leader>r :LspRename<CR>
 nmap <Leader>R :LspReferences<CR>
 nmap <Leader>w :q<CR>
 
+" spelling
+nmap <Leader>s :setlocal spell spelllang=sv_se<CR>
+nmap <Leader>f 1z=
+
 nnoremap <Leader>p :CtrlP<CR>
 
 nnoremap <c-B> :make<CR>
-
 
 
