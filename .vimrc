@@ -6,6 +6,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'veloce/vim-aldmeris'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'prabirshrestha/vim-lsp'
+Plug 'preservim/nerdtree'
 call plug#end()
 
 " Misc settings
@@ -36,16 +37,12 @@ set makeprg=matmake2\ -t\ gcc-debug
 
 syn match UrlNoSpell "\w\+:\/\/[^[:space:]]\+" contains=@NoSpell
 
-" Keybindings
-" ===================================================================
-
-" https://stackoverflow.com/questions/3446320/in-vim-how-to-map-save-to-ctrl-s
-" Remember to add the following to ~/.bash_profile or ~/.bashrc
-" To prevent the terminal to catch the ctrl+s
-" bind -r '\C-s'
-" stty -ixon
+" Spelling disable check on http addresses
+" https://vi.stackexchange.com/questions/3990/ignore-urls-and-email-addresses-in-spell-file
+syn match UrlNoSpell "\w\+:\/\/[^[:space:]]\+" contains=@NoSpell
 
 
+let NERDTreeCustomOpenArgs={'file':{'where': 't'}}
 
 
 " Clang format
@@ -111,7 +108,11 @@ augroup lsp_install
 
 " Keymaps
 " =====================================0000
-
+" https://stackoverflow.com/questions/3446320/in-vim-how-to-map-save-to-ctrl-s
+" Remember to add the following to ~/.bash_profile or ~/.bashrc
+" To prevent the terminal to catch the ctrl+s
+" bind -r '\C-s'
+" stty -ixon
 " Save with ctrl+s
 " :update saves if there has been any changes to the file
 nmap <c-s> :update<CR>
@@ -127,6 +128,7 @@ nmap <Space> <Leader>
 nmap <Leader>r :LspRename<CR>
 nmap <Leader>R :LspReferences<CR>
 nmap <Leader>w :q<CR>
+nmap <Leader>n :NERDTree<CR>
 
 " spelling
 nmap <Leader>s :setlocal spell spelllang=sv_se<CR>
